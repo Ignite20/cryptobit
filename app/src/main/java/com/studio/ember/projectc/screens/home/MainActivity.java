@@ -11,12 +11,14 @@ import android.view.MenuItem;
 
 import com.studio.ember.projectc.R;
 import com.studio.ember.projectc.screens.recipes.RecipeFragment;
+import com.studio.ember.projectc.screens.recipes.RecipePresenter;
 import com.studio.ember.projectc.utils.Navigator;
 
-public class MainActivity extends AppCompatActivity implements RecipeFragment.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity {
 
     RecipeFragment recipeFragment;
     Toolbar mActionBarToolbar;
+
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -43,9 +45,8 @@ public class MainActivity extends AppCompatActivity implements RecipeFragment.On
         }
     };
 
-    void changeActionBarTitle(String title){
+    void changeActionBarTitle(String title) {
 
-        //getSupportActionBar().setTitle(title);
         mActionBarToolbar.setTitle(title);
 
     }
@@ -66,13 +67,19 @@ public class MainActivity extends AppCompatActivity implements RecipeFragment.On
         super.onStart();
         setSupportActionBar(mActionBarToolbar);
 
-        if(recipeFragment == null) recipeFragment = RecipeFragment.newInstance();
+        // SETUP
+        init();
 
         Navigator.goToRecipes(MainActivity.this, recipeFragment, R.id.flContainer);
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
+    private void init(){
 
+        // Setup Recipe Fragment
+        if (recipeFragment == null) {
+            recipeFragment = RecipeFragment.newInstance();
+            recipeFragment.setPresenter(new RecipePresenter(recipeFragment));
+        }
     }
 }
+

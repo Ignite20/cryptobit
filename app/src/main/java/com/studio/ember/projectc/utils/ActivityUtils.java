@@ -22,7 +22,4 @@ public class ActivityUtils {
         fragmentManager.beginTransaction().add(container,fragment, Constants.RECIPE_FRAGMENT).commit();
     }
 
-    public static boolean isFragmentAdded(String fragmentTag){
-        return fragmentManager.findFragmentByTag(fragmentTag) != null;
-    }
 }

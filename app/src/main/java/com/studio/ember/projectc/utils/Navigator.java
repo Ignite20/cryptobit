@@ -10,7 +10,7 @@ public class Navigator {
 
     public static void goToRecipes(Activity activity, RecipeFragment recipeFragment, int container){
         ActivityUtils.init(activity);
-        if(!ActivityUtils.isFragmentAdded(Constants.RECIPE_FRAGMENT))
+        if(!recipeFragment.isAdded())
             ActivityUtils.addFragment(recipeFragment, container);
         else
             ActivityUtils.replaceFragment(recipeFragment, container);
