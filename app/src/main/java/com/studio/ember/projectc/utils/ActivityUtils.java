@@ -9,8 +9,7 @@ public class ActivityUtils {
     static FragmentManager fragmentManager;
 
     public static void init(Activity activity){
-        if(fragmentManager == null)
-            fragmentManager = activity.getFragmentManager();
+        fragmentManager = activity.getFragmentManager();
     }
 
     public static void replaceFragment(Fragment fragment, int container){

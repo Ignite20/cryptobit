@@ -1,13 +1,11 @@
 package com.studio.ember.projectc.screens.home;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-
 
 import com.studio.ember.projectc.R;
 import com.studio.ember.projectc.screens.recipes.RecipeFragment;
@@ -70,7 +68,13 @@ public class MainActivity extends AppCompatActivity {
         // SETUP
         init();
 
-        Navigator.goToRecipes(MainActivity.this, recipeFragment, R.id.flContainer);
+        //Navigator.goToRecipes(MainActivity.this, recipeFragment, R.id.flContainer);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        recipeFragment = null;
     }
 
     private void init(){

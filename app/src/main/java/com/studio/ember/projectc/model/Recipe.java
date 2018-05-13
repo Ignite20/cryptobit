@@ -6,7 +6,7 @@ public class Recipe extends BaseModel{
     private int userId;
     private String name;
     private String description;
-    private List<String> Photo;
+    private String photo;
     private List<RecipeIngredient> ingredients;
     private List<Step> steps;
     private Country country;
@@ -14,17 +14,29 @@ public class Recipe extends BaseModel{
     private int likes;
     private boolean favorite;
 
-    public Recipe(int userId, String name, String description, List<String> photo, List<RecipeIngredient> ingredients, List<Step> steps, Country country, RecipeType recipeType, int likes, boolean favorite) {
+    public Recipe(int userId, String name, String description, String photo, List<RecipeIngredient> ingredients, List<Step> steps, Country country, RecipeType recipeType, int likes, boolean favorite) {
         this.userId = userId;
         this.name = name;
         this.description = description;
-        Photo = photo;
+        this.photo = photo;
         this.ingredients = ingredients;
         this.steps = steps;
         this.country = country;
         this.recipeType = recipeType;
         this.likes = likes;
         this.favorite = favorite;
+    }
+
+    public Recipe(int userId, String name, String description, String photo, int likes) {
+        this.userId = userId;
+        this.name = name;
+        this.description = description;
+        this.photo = photo;
+        this.country = country;
+    }
+
+    public Recipe() {
+
     }
 
     public int getUserId() {
@@ -51,12 +63,12 @@ public class Recipe extends BaseModel{
         this.description = description;
     }
 
-    public List<String> getPhoto() {
-        return Photo;
+    public String getPhoto() {
+        return this.photo;
     }
 
-    public void setPhoto(List<String> photo) {
-        Photo = photo;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public List<RecipeIngredient> getIngredients() {

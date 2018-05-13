@@ -1,10 +1,10 @@
 package com.studio.ember.projectc.screens.recipes;
 
-import android.content.Context;
-import android.net.Uri;
-import android.os.Bundle;
 import android.app.Fragment;
+import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,12 +13,13 @@ import android.view.ViewGroup;
 import com.studio.ember.projectc.R;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 
 /**
  * A fragment with a Google +1 button.
  * Activities that contain this fragment must implement the
- * {@link RecipeFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link RecipeFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -26,7 +27,9 @@ import butterknife.BindView;
 public class RecipeFragment extends Fragment implements RecipeContract.View{
 
 
-    private RecipePresenter mPresenter;
+    private RecipeContract.Presenter mPresenter;
+    private LinearLayoutManager layoutManager;
+    private Unbinder unbinder;
 
 
     @BindView(R.id.rvRecipeList)
@@ -51,6 +54,7 @@ public class RecipeFragment extends Fragment implements RecipeContract.View{
         if (getArguments() != null) {
 
         }
+
     }
 
     @Override
@@ -58,14 +62,15 @@ public class RecipeFragment extends Fragment implements RecipeContract.View{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_recipe, container, false);
-
+        unbinder = ButterKnife.bind(this, view);
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         mPresenter.start();
-
+        layoutManager = new LinearLayoutManager(getActivity());
+        mPresenter.adaptRecyclerView(rvRecipeList, layoutManager);
     }
 
     @Override
@@ -83,6 +88,7 @@ public class RecipeFragment extends Fragment implements RecipeContract.View{
     @Override
     public void onDetach() {
         super.onDetach();
+        unbinder.unbind();
     }
 
     @Override
@@ -90,17 +96,11 @@ public class RecipeFragment extends Fragment implements RecipeContract.View{
 
     }
 
+
     @Override
-    public void setPresenter(Object presenter) {
-
+    public void setPresenter(RecipeContract.Presenter presenter) {
+        mPresenter = presenter;
     }
 
-    /**
-     *
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 
 }
