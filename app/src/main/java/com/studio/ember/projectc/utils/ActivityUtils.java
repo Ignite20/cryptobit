@@ -17,8 +17,7 @@ public class ActivityUtils {
     }
 
     public static void addFragment(Fragment fragment, int container){
-        //fragmentManager.beginTransaction().add(container, fragment).addToBackStack(Constants.RECIPE_FRAGMENT).commit();
-        fragmentManager.beginTransaction().add(container,fragment, Constants.RECIPE_FRAGMENT).commit();
+        fragmentManager.beginTransaction().add(container, fragment).commit();
     }
 
 }

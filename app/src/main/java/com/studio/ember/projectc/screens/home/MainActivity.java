@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.studio.ember.projectc.R;
+import com.studio.ember.projectc.screens.profile.ProfileFragment;
+import com.studio.ember.projectc.screens.profile.ProfilePresenter;
 import com.studio.ember.projectc.screens.recipes.RecipeFragment;
 import com.studio.ember.projectc.screens.recipes.RecipePresenter;
 import com.studio.ember.projectc.utils.Navigator;
@@ -15,6 +17,8 @@ import com.studio.ember.projectc.utils.Navigator;
 public class MainActivity extends AppCompatActivity {
 
     RecipeFragment recipeFragment;
+    ProfileFragment profileFragment;
+
     Toolbar mActionBarToolbar;
 
 
@@ -29,13 +33,12 @@ public class MainActivity extends AppCompatActivity {
                     changeActionBarTitle("Home");
                     return true;
                 case R.id.navigation_recipes:
-
-
-                    Navigator.goToRecipes(MainActivity.this, recipeFragment, R.id.flContainer);
+                    Navigator.goToRecipes(MainActivity.this, recipeFragment, R.id.flContainer, true);
                     changeActionBarTitle("Recipes");
 
                     return true;
                 case R.id.navigation_profile:
+                    Navigator.goToProfile(MainActivity.this, profileFragment, R.id.flContainer, true);
                     changeActionBarTitle("Profile");
                     return true;
             }
@@ -68,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         // SETUP
         init();
 
-        //Navigator.goToRecipes(MainActivity.this, recipeFragment, R.id.flContainer);
+        Navigator.goToRecipes(MainActivity.this, recipeFragment, R.id.flContainer, false);
     }
 
     @Override
@@ -83,6 +86,12 @@ public class MainActivity extends AppCompatActivity {
         if (recipeFragment == null) {
             recipeFragment = RecipeFragment.newInstance();
             recipeFragment.setPresenter(new RecipePresenter(recipeFragment));
+        }
+
+        // Setup Profile Fragment
+        if (profileFragment == null) {
+            profileFragment = ProfileFragment.newInstance();
+            profileFragment.setPresenter(new ProfilePresenter(profileFragment));
         }
     }
 }

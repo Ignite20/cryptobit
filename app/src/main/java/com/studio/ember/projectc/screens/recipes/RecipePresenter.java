@@ -1,6 +1,7 @@
 package com.studio.ember.projectc.screens.recipes;
 
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,15 +13,15 @@ import java.util.ArrayList;
 
 public class RecipePresenter implements RecipeContract.Presenter {
 
-    private RecipeContract.View mFragment;
+    private RecipeContract.View mView;
     private RecipeAdapter recipeAdapter;
 
 
     private ArrayList<Recipe> recipes;
 
     public RecipePresenter(@NonNull RecipeContract.View recipeFragment) {
-        this.mFragment = recipeFragment;
-        this.mFragment.setPresenter(this);
+        this.mView = recipeFragment;
+        this.mView.setPresenter(this);
         recipes = new ArrayList<>();
     }
 
@@ -41,6 +42,11 @@ public class RecipePresenter implements RecipeContract.Presenter {
             recipes.add(recipe);
 
         }
+    }
+
+    @Override
+    public void openCreateRecipe(Activity activity) {
+        mView.showToastMessage("creating new recipe");
     }
 
     @Override

@@ -9,11 +9,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.studio.ember.projectc.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 
@@ -35,6 +37,7 @@ public class RecipeFragment extends Fragment implements RecipeContract.View{
     @BindView(R.id.rvRecipeList)
     RecyclerView rvRecipeList;
 
+
     public RecipeFragment() {
         // Required empty public constructor
     }
@@ -54,7 +57,6 @@ public class RecipeFragment extends Fragment implements RecipeContract.View{
         if (getArguments() != null) {
 
         }
-
     }
 
     @Override
@@ -96,10 +98,21 @@ public class RecipeFragment extends Fragment implements RecipeContract.View{
 
     }
 
+    @OnClick(R.id.fbAddRecipe)
+    @Override
+    public void createRecipe() {
+        mPresenter.openCreateRecipe(getActivity());
+    }
+
 
     @Override
     public void setPresenter(RecipeContract.Presenter presenter) {
         mPresenter = presenter;
+    }
+
+    @Override
+    public void showToastMessage(String message) {
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
 
