@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.studio.ember.cryptobit.R;
+import com.studio.ember.cryptobit.model.Coin;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -59,7 +60,7 @@ public class CoinDetailFragment extends Fragment implements CoinDetailContract.V
     }
 
     @Override
-    public void setInfo(User user) {
+    public void setInfo(Coin coin) {
 
     }
 

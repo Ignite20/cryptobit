@@ -2,12 +2,13 @@ package com.studio.ember.cryptobit.screens.coindetail;
 
 import com.studio.ember.cryptobit.BasePresenter;
 import com.studio.ember.cryptobit.BaseView;
+import com.studio.ember.cryptobit.model.Coin;
 
 public interface CoinDetailContract {
     interface View extends BaseView<CoinDetailContract.Presenter> {
         void changePicture();
 
-        void setInfo(User user);
+        void setInfo(Coin coin);
     }
 
     interface Presenter extends BasePresenter {

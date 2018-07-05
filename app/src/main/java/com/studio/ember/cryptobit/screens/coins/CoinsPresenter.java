@@ -26,22 +26,7 @@ public class CoinsPresenter implements CoinsContract.Presenter {
     }
 
     private void fillRecipes() {
-        coins.clear();
-        Coin coin;
-        for (int i = 0; i < 10; i++) {
-            coin = new Coin(
-                    i,
-                    "User Name " + i,
-                    "Awesome description " + i,
-                    "",
-                    3 * i);
 
-            // Alternate favorite value
-            coin.setFavorite(i % 2 == 0);
-
-            coins.add(coin);
-
-        }
     }
 
     @Override

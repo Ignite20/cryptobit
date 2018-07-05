@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         // SETUP
         init();
 
+
         Navigator.goToRecipes(MainActivity.this, coinsFragment, R.id.flContainer, false);
     }
 
