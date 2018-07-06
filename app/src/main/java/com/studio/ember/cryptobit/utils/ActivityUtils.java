@@ -13,6 +13,7 @@ public class ActivityUtils {
     }
 
     public static void replaceFragment(Fragment fragment, int container){
+        fragmentManager.popBackStackImmediate();
         fragmentManager.beginTransaction().replace(container,fragment).commit();
     }
 

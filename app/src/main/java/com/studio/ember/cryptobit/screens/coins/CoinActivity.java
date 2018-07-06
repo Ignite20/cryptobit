@@ -1,4 +1,4 @@
-package com.studio.ember.cryptobit.screens.home;
+package com.studio.ember.cryptobit.screens.coins;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,15 +6,11 @@ import android.support.v7.widget.Toolbar;
 
 import com.studio.ember.cryptobit.R;
 import com.studio.ember.cryptobit.screens.coindetail.CoinDetailFragment;
-import com.studio.ember.cryptobit.screens.coindetail.CoinDetailPresenter;
-import com.studio.ember.cryptobit.screens.coins.CoinsFragment;
-import com.studio.ember.cryptobit.screens.coins.CoinsPresenter;
 import com.studio.ember.cryptobit.utils.Navigator;
 
-public class MainActivity extends AppCompatActivity {
+public class CoinActivity extends AppCompatActivity {
 
     CoinsFragment coinsFragment;
-    CoinDetailFragment coinDetailFragment;
 
     Toolbar mActionBarToolbar;
 
@@ -31,6 +27,12 @@ public class MainActivity extends AppCompatActivity {
 
         mActionBarToolbar = findViewById(R.id.action_bar_toolbar);
         changeActionBarTitle("Home");
+
+        // SETUP
+        init();
+
+
+        Navigator.goToCoins(CoinActivity.this, coinsFragment, R.id.flContainer, false);
     }
 
     @Override
@@ -38,11 +40,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         setSupportActionBar(mActionBarToolbar);
 
-        // SETUP
-        init();
 
-
-        Navigator.goToRecipes(MainActivity.this, coinsFragment, R.id.flContainer, false);
     }
 
     @Override
@@ -56,14 +54,9 @@ public class MainActivity extends AppCompatActivity {
         // Setup Coin Fragment
         if (coinsFragment == null) {
             coinsFragment = CoinsFragment.newInstance();
-            coinsFragment.setPresenter(new CoinsPresenter(coinsFragment));
+            coinsFragment.setPresenter(new CoinsPresenter(this, coinsFragment));
         }
 
-        // Setup Profile Fragment
-        if (coinDetailFragment == null) {
-            coinDetailFragment = CoinDetailFragment.newInstance();
-            coinDetailFragment.setPresenter(new CoinDetailPresenter(coinDetailFragment));
-        }
     }
 }
 

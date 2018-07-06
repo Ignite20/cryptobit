@@ -54,10 +54,7 @@ public class CoinDetailFragment extends Fragment implements CoinDetailContract.V
         return view;
     }
 
-    @Override
-    public void changePicture() {
 
-    }
 
     @Override
     public void setInfo(Coin coin) {

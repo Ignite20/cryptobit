@@ -9,22 +9,18 @@ import com.studio.ember.cryptobit.BaseView;
 
 public interface CoinsContract {
     interface View extends BaseView<CoinsContract.Presenter> {
-        void onRecipeClick(int position);
+        void onCoinClick(int position);
 
-        void createRecipe();
+        void terminateUpdate();
+
     }
 
     interface Presenter extends BasePresenter{
-        void openRecipe();
 
-        void LikeRecipe();
-
-        void commentOnRecipe();
-
-        void openCreateRecipe(Activity activity);
 
         void adaptRecyclerView(RecyclerView rv, LinearLayoutManager layoutManager);
 
+        void updateData();
     }
 
 

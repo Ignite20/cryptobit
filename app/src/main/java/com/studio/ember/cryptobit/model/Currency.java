@@ -1,6 +1,8 @@
 package com.studio.ember.cryptobit.model;
 
-public class Currency {
+import java.io.Serializable;
+
+public class Currency implements Serializable{
     private double price;
     private double volume_24h;
     private double market_cap;

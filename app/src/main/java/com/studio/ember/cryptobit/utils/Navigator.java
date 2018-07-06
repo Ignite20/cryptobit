@@ -1,14 +1,24 @@
 package com.studio.ember.cryptobit.utils;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 
+import com.studio.ember.cryptobit.model.Coin;
+import com.studio.ember.cryptobit.screens.coindetail.CoinDetailActivity;
 import com.studio.ember.cryptobit.screens.coindetail.CoinDetailFragment;
 import com.studio.ember.cryptobit.screens.coins.CoinsFragment;
 
-public class Navigator {
+import java.io.Serializable;
+
+import static com.studio.ember.cryptobit.utils.Constants.COIN_DETAILS;
+
+public class Navigator <T>{
 
 
-    public static void goToRecipes(Activity activity, CoinsFragment coinsFragment, int container, boolean replace) {
+    public static void goToCoins(Activity activity, CoinsFragment coinsFragment, int container, boolean replace) {
         if (activity != null) {
             ActivityUtils.init(activity);
             if (!replace)
@@ -18,17 +28,15 @@ public class Navigator {
         }
     }
 
-    public static void goToDetails(Activity activity, CoinDetailFragment coinDetailFragment, int container, boolean replace) {
-        if (activity != null) {
-            ActivityUtils.init(activity);
-            if (!replace)
-                ActivityUtils.addFragment(coinDetailFragment, container);
-            else
-                ActivityUtils.replaceFragment(coinDetailFragment, container);
-        }
-    }
+    public static void goToDetails(Activity activity, Coin object) {
 
-    public static void goToHome(){
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(COIN_DETAILS, object);
+
+        Intent mIntent = new Intent(activity, CoinDetailActivity.class);
+        mIntent.putExtras(bundle);
+        activity.startActivity(mIntent);
 
     }
+
 }

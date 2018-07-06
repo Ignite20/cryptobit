@@ -1,9 +1,11 @@
 package com.studio.ember.cryptobit.screens.coins;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -33,6 +35,8 @@ public class CoinsFragment extends Fragment implements CoinsContract.View{
     private LinearLayoutManager layoutManager;
     private Unbinder unbinder;
 
+    @BindView(R.id.srl_cryptUpdate)
+    SwipeRefreshLayout srl_cryptUpdate;
 
     @BindView(R.id.rvRecipeList)
     RecyclerView rvRecipeList;
@@ -69,10 +73,23 @@ public class CoinsFragment extends Fragment implements CoinsContract.View{
     }
 
     @Override
+    public void terminateUpdate() {
+        srl_cryptUpdate.setRefreshing(false);
+    }
+
+    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         mPresenter.start();
         layoutManager = new LinearLayoutManager(getActivity());
         mPresenter.adaptRecyclerView(rvRecipeList, layoutManager);
+
+        srl_cryptUpdate.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPresenter.updateData();
+            }
+        });
+
     }
 
     @Override
@@ -93,17 +110,6 @@ public class CoinsFragment extends Fragment implements CoinsContract.View{
         unbinder.unbind();
     }
 
-    @Override
-    public void onRecipeClick(int position) {
-
-    }
-
-    @OnClick(R.id.fbAddRecipe)
-    @Override
-    public void createRecipe() {
-        mPresenter.openCreateRecipe(getActivity());
-    }
-
 
     @Override
     public void setPresenter(CoinsContract.Presenter presenter) {
@@ -116,4 +122,8 @@ public class CoinsFragment extends Fragment implements CoinsContract.View{
     }
 
 
+    @Override
+    public void onCoinClick(int position) {
+
+    }
 }

@@ -9,10 +9,6 @@ public class CoinDetailPresenter implements CoinDetailContract.Presenter {
         this.mView.setPresenter(this);
     }
 
-    @Override
-    public void changeProfilePicture() {
-
-    }
 
     @Override
     public void start() {

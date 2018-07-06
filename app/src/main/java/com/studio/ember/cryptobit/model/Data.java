@@ -1,10 +1,14 @@
 package com.studio.ember.cryptobit.model;
 
-import java.util.Map;
+import com.google.gson.GsonBuilder;
 
-public class Data {
-    private Map<Integer, Coin> data;
+import java.util.ArrayList;
+
+public class Data extends BaseClassModel{
+    private ArrayList<Coin> data;
     private Metadata metadata;
 
-
+    public ArrayList<Coin> getData() {
+        return data;
+    }
 }

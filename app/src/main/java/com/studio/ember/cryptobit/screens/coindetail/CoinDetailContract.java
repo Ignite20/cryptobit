@@ -6,14 +6,11 @@ import com.studio.ember.cryptobit.model.Coin;
 
 public interface CoinDetailContract {
     interface View extends BaseView<CoinDetailContract.Presenter> {
-        void changePicture();
 
         void setInfo(Coin coin);
     }
 
     interface Presenter extends BasePresenter {
-        void changeProfilePicture();
-
 
     }
 }

@@ -2,30 +2,25 @@ package com.studio.ember.cryptobit.model;
 
 import android.support.annotation.Nullable;
 
+import com.google.gson.GsonBuilder;
+
+import java.io.Serializable;
 import java.util.Map;
 
-public class Coin extends BaseModel{
+public class Coin extends BaseClassModel implements Serializable{
 
     private int id;
     private String name;
     private String symbol;
     private String website_slug;
     private int rank;
-    private int circulating_supply;
-    private int total_supply;
-
-    @Nullable
-    private int max_supply;
-
-    private Map<String, Map<String, Currency>> quotes;
+    private double circulating_supply;
+    private double total_supply;
+    private double max_supply;
+    private Map<String, Currency> quotes;
     private int last_updated;
 
-    public Coin() {
 
-    }
-
-
-    @Override
     public int getId() {
         return id;
     }
@@ -46,24 +41,25 @@ public class Coin extends BaseModel{
         return rank;
     }
 
-    public int getCirculating_supply() {
+    public double getCirculating_supply() {
         return circulating_supply;
     }
 
-    public int getTotal_supply() {
+    public double getTotal_supply() {
         return total_supply;
     }
 
-    @Nullable
-    public int getMax_supply() {
+    public double getMax_supply() {
         return max_supply;
     }
 
-    public Map<String, Map<String, Currency>> getQuotes() {
+    public Map<String, Currency> getQuotes() {
         return quotes;
     }
 
     public int getLast_updated() {
         return last_updated;
     }
+
+
 }
