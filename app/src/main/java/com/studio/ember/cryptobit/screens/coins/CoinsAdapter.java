@@ -80,7 +80,7 @@ public class CoinsAdapter extends RecyclerView.Adapter<CoinsAdapter.CoinViewHold
                         String lowerSymbol = coin.getSymbol().toLowerCase();
                         String lowerFilterSearch = charSequence.toString().toLowerCase();
                         // Check the start of the name or symbol
-                        if(lowerName.startsWith(lowerFilterSearch) || lowerSymbol.startsWith(lowerFilterSearch)){
+                        if(lowerName.contains(lowerFilterSearch) || lowerSymbol.contains(lowerFilterSearch)){
                             // Add the item to the filtered list
                             mFilteredList.add(coin);
                         }
