@@ -1,40 +1,48 @@
 package com.studio.ember.cryptobit.screens.coins;
 
-import android.app.Application;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import com.studio.ember.cryptobit.R;
-import com.studio.ember.cryptobit.screens.coindetail.CoinDetailFragment;
 import com.studio.ember.cryptobit.utils.ActivityUtils;
-import com.studio.ember.cryptobit.utils.Navigator;
 
 public class CoinActivity extends AppCompatActivity {
 
     CoinsFragment coinsFragment;
-
+    CoinsContract.Presenter mPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // SETUP
+        // SETUP Fragment
         init();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initPresenter();
     }
 
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        coinsFragment = null;
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    private void initPresenter(){
+        if(mPresenter == null){
+            mPresenter = new CoinsPresenter(this, coinsFragment);
+        }
     }
 
     private void init(){
         // Setup Coin Fragment
+
         if (coinsFragment == null) {
             coinsFragment = CoinsFragment.newInstance();
-            coinsFragment.setPresenter(new CoinsPresenter(this, coinsFragment));
+            initPresenter();
+            coinsFragment.setPresenter(mPresenter);
         }
         // Attach fragment to activity
         ActivityUtils utils = new ActivityUtils();

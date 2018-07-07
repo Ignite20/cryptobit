@@ -9,7 +9,7 @@ import com.studio.ember.cryptobit.utils.ActivityUtils;
 public class CoinDetailActivity extends AppCompatActivity {
 
     CoinDetailFragment coinDetailFragment;
-
+    CoinDetailContract.Presenter mPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,12 +18,29 @@ public class CoinDetailActivity extends AppCompatActivity {
         if(coinDetailFragment == null){
             coinDetailFragment = CoinDetailFragment.newInstance(getIntent().getExtras());
         }
+        if(mPresenter == null){
+            mPresenter = new CoinDetailPresenter(coinDetailFragment);
+        }
 
-        coinDetailFragment.setPresenter(new CoinDetailPresenter(coinDetailFragment));
+        coinDetailFragment.setPresenter(mPresenter);
 
         ActivityUtils utils = new ActivityUtils();
         utils.init(this);
         utils.addFragment(coinDetailFragment, R.id.flContainer);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(mPresenter == null){
+            mPresenter = new CoinDetailPresenter(coinDetailFragment);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        coinDetailFragment = null;
     }
 }

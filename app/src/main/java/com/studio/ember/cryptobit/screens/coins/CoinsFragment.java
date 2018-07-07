@@ -118,6 +118,12 @@ public class CoinsFragment extends Fragment implements CoinsContract.View{
     }
 
     @Override
+    public void onStop() {
+        super.onStop();
+        mPresenter.stop();
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
         unbinder.unbind();

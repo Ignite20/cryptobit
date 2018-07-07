@@ -58,7 +58,12 @@ public class CoinsPresenter implements CoinsContract.Presenter, CoinsAdapter.OnI
 
     @Override
     public void stop() {
-
+        this.coinsAdapter = null;
+        this.mRecView = null;
+        this.mView = null;
+        this.proxy = null;
+        this.async = null;
+        System.gc();
     }
 
 

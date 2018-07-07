@@ -9,11 +9,13 @@ import com.studio.ember.cryptobit.webservice.currency.CurrencyProxy;
 
 import java.io.IOException;
 
+import static com.studio.ember.cryptobit.utils.Constants.MARKET_COIN;
+
 public class CoinDetailPresenter implements CoinDetailContract.Presenter {
 
     private CoinDetailContract.View mView;
     private Coin coin;
-    private String marketCoin = "USD";
+    private String marketCoin = MARKET_COIN;
     private CurrencyProxy proxy;
     private CurrencyAsync currencyAsync;
 
@@ -51,7 +53,9 @@ public class CoinDetailPresenter implements CoinDetailContract.Presenter {
 
     @Override
     public void stop() {
-
+        currencyAsync = null;
+        proxy = null;
+        mView = null;
     }
 
     class CurrencyAsync extends AsyncTask<Coin, Void, Data> {

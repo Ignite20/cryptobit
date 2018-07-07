@@ -152,6 +152,11 @@ public class CoinDetailFragment extends Fragment implements CoinDetailContract.V
         });
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        mPresenter.stop();
+    }
 
     @Override
     public void setPresenter(CoinDetailContract.Presenter presenter) {
@@ -167,6 +172,7 @@ public class CoinDetailFragment extends Fragment implements CoinDetailContract.V
     @Override
     public void onDetach() {
         super.onDetach();
+        mPresenter = null;
         unbinder.unbind();
     }
 }
