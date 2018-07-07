@@ -16,6 +16,7 @@ import com.studio.ember.cryptobit.model.Coin;
 import com.studio.ember.cryptobit.utils.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -37,11 +38,13 @@ public class CoinsAdapter extends RecyclerView.Adapter<CoinsAdapter.CoinViewHold
     private final OnItemClickListener listener;
     private List<Coin> mCoins;  // the one showed to the user
     private List<Coin> originalList;    // the original one for filtering purposes
+    private List<Coin> mFilteredList;
     private String coinMark = "USD";
     public CoinsAdapter(List<Coin> coins, OnItemClickListener listener) {
         this.listener = listener;
         this.mCoins = coins;
         this.originalList = coins;
+        this.mFilteredList = new ArrayList<>();
     }
 
     @NonNull
@@ -64,13 +67,12 @@ public class CoinsAdapter extends RecyclerView.Adapter<CoinsAdapter.CoinViewHold
 
     @Override
     public Filter getFilter() {
-        final List<Coin> mFilteredList = new ArrayList<>();
-        mCoins = originalList;
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
                 FilterResults results = new FilterResults();
-
+                mCoins = originalList;
+                mFilteredList = new ArrayList<>();
                 if(!charSequence.toString().isEmpty() || charSequence.toString().length() > 0){
                     for (Coin coin : mCoins) {
                         // Break variables into scope variables to ease of use
@@ -85,10 +87,12 @@ public class CoinsAdapter extends RecyclerView.Adapter<CoinsAdapter.CoinViewHold
                     }
                     // return the filtered values
                     results.values = mFilteredList;
+                    results.count = mFilteredList.size();
                 }
                 else{
                     // Return the original list if the search sequence is an empty string
                     results.values = originalList;
+                    results.count = originalList.size();
                 }
                 return results;
             }
@@ -116,6 +120,7 @@ public class CoinsAdapter extends RecyclerView.Adapter<CoinsAdapter.CoinViewHold
 
     class CoinViewHolder extends RecyclerView.ViewHolder{
 
+        View view;
         @BindView(R.id.tv_name)
         TextView tv_name;
 
@@ -133,7 +138,8 @@ public class CoinsAdapter extends RecyclerView.Adapter<CoinsAdapter.CoinViewHold
 
         CoinViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,view);
+            view = itemView;
+            ButterKnife.bind(this, this.view);
         }
 
         void setItem(final Coin coin, final OnItemClickListener listener){
@@ -147,18 +153,18 @@ public class CoinsAdapter extends RecyclerView.Adapter<CoinsAdapter.CoinViewHold
             this.tv_24h_change.setText(String.valueOf(value24h));
 
             if (value1h > 0) {
-                tv_1h_change.setTextColor(ContextCompat.getColor(view.getContext(), R.color.green));
+                tv_1h_change.setTextColor(ContextCompat.getColor(this.view.getContext(), R.color.green));
             } else {
-                tv_1h_change.setTextColor(ContextCompat.getColor(view.getContext(), R.color.red));
+                tv_1h_change.setTextColor(ContextCompat.getColor(this.view.getContext(), R.color.red));
             }
 
             if (value24h > 0) {
-                tv_24h_change.setTextColor(ContextCompat.getColor(view.getContext(), R.color.green));
+                tv_24h_change.setTextColor(ContextCompat.getColor(this.view.getContext(), R.color.green));
             } else {
-                tv_24h_change.setTextColor(ContextCompat.getColor(view.getContext(), R.color.red));
+                tv_24h_change.setTextColor(ContextCompat.getColor(this.view.getContext(), R.color.red));
             }
 
-            view.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     listener.onItemClick(coin);

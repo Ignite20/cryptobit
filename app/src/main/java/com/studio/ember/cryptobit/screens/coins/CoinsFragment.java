@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -77,7 +78,6 @@ public class CoinsFragment extends Fragment implements CoinsContract.View{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_coin, container, false);
-
         unbinder = ButterKnife.bind(this, view);
         return view;
     }
@@ -114,6 +114,7 @@ public class CoinsFragment extends Fragment implements CoinsContract.View{
                 return true;
             }
         });
+
     }
 
     @Override
