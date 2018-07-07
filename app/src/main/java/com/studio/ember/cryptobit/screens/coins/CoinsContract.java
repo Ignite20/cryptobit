@@ -1,6 +1,5 @@
 package com.studio.ember.cryptobit.screens.coins;
 
-import android.app.Activity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -30,6 +29,12 @@ public interface CoinsContract {
          * Updates data
          */
         void updateData();
+
+        /**
+         * Filters the data and updates the list
+         * @param filterText the text to filter by
+         */
+        void filterData(String filterText);
     }
 
 

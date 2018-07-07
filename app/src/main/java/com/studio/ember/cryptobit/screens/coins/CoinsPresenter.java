@@ -80,6 +80,11 @@ public class CoinsPresenter implements CoinsContract.Presenter, CoinsAdapter.OnI
     }
 
     @Override
+    public void filterData(String filterText) {
+
+    }
+
+    @Override
     public void onItemClick(Coin item) {
         Log.d("item clicked", item.toString());
         Navigator.goToDetails(activity, item);
