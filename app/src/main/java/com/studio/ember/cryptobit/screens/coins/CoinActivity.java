@@ -21,13 +21,13 @@ public class CoinActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        initPresenter();
     }
 
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        System.gc();
     }
 
     private void initPresenter(){

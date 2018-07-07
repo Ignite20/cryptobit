@@ -53,9 +53,6 @@ public class CoinDetailPresenter implements CoinDetailContract.Presenter {
 
     @Override
     public void stop() {
-        currencyAsync = null;
-        proxy = null;
-        mView = null;
     }
 
     class CurrencyAsync extends AsyncTask<Coin, Void, Data> {

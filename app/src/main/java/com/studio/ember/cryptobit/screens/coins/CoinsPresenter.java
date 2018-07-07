@@ -37,9 +37,7 @@ public class CoinsPresenter implements CoinsContract.Presenter, CoinsAdapter.OnI
         this.activity = activity;
         this.mView = recipeFragment;
         this.mView.setPresenter(this);
-        coins = new ArrayList<>();
-        proxy = new CurrencyProxy();
-        async = new CurrencyAsync();
+
     }
 
 
@@ -48,6 +46,9 @@ public class CoinsPresenter implements CoinsContract.Presenter, CoinsAdapter.OnI
         try {
             Log.d("presenter start", CoinsPresenter.class.getName() + " started");
             // Instantiate the adapter
+            coins = new ArrayList<>();
+            proxy = new CurrencyProxy();
+            async = new CurrencyAsync();
             async.execute();
             Log.d("presenter_coins start", this.coins.toString());
 
@@ -58,12 +59,6 @@ public class CoinsPresenter implements CoinsContract.Presenter, CoinsAdapter.OnI
 
     @Override
     public void stop() {
-        this.coinsAdapter = null;
-        this.mRecView = null;
-        this.mView = null;
-        this.proxy = null;
-        this.async = null;
-        System.gc();
     }
 
 

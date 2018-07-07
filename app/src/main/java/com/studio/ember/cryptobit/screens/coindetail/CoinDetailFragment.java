@@ -82,19 +82,21 @@ public class CoinDetailFragment extends Fragment implements CoinDetailContract.V
             // Get currency object from coin for ease of use
             Currency curr = coin.getQuotes().get(mPresenter.getMarketCoin());
 
-            // Set values to GUI
-            tv_name.setText(coin.getName());
-            tv_symbol.setText(coin.getSymbol());
-            tv_rank.setText(String.valueOf(coin.getRank()));
-            tv_circulating_supply.setText(StringUtils.formatFloat(coin.getCirculating_supply()));
-            tv_total_supply.setText(StringUtils.formatFloat(coin.getTotal_supply()));
-            tv_max_supply.setText(StringUtils.formatFloat(coin.getMax_supply()));
-            tv_price.setText(StringUtils.formatFloat(curr.getPrice()));
-            tv_volumne_24h.setText(StringUtils.formatFloat(curr.getVolume_24h()));
-            tv_market_cap.setText(StringUtils.formatFloat(curr.getMarket_cap()));
-            tv_change_1h.setText(StringUtils.formatFloat(curr.getPercent_change_1h()));
-            tv_change_24h.setText(StringUtils.formatFloat(curr.getPercent_change_24h()));
-            tv_change_7d.setText(StringUtils.formatFloat(curr.getPercent_change_7d()));
+            if(curr != null) {
+                // Set values to GUI
+                tv_name.setText(coin.getName());
+                tv_symbol.setText(coin.getSymbol());
+                tv_rank.setText(String.valueOf(coin.getRank()));
+                tv_circulating_supply.setText(StringUtils.formatFloat(coin.getCirculating_supply()));
+                tv_total_supply.setText(StringUtils.formatFloat(coin.getTotal_supply()));
+                tv_max_supply.setText(StringUtils.formatFloat(coin.getMax_supply()));
+                tv_price.setText(StringUtils.formatFloat(curr.getPrice()));
+                tv_volumne_24h.setText(StringUtils.formatFloat(curr.getVolume_24h()));
+                tv_market_cap.setText(StringUtils.formatFloat(curr.getMarket_cap()));
+                tv_change_1h.setText(StringUtils.formatFloat(curr.getPercent_change_1h()));
+                tv_change_24h.setText(StringUtils.formatFloat(curr.getPercent_change_24h()));
+                tv_change_7d.setText(StringUtils.formatFloat(curr.getPercent_change_7d()));
+            }
         }
     }
 
@@ -155,7 +157,6 @@ public class CoinDetailFragment extends Fragment implements CoinDetailContract.V
     @Override
     public void onStop() {
         super.onStop();
-        mPresenter.stop();
     }
 
     @Override
@@ -172,7 +173,6 @@ public class CoinDetailFragment extends Fragment implements CoinDetailContract.V
     @Override
     public void onDetach() {
         super.onDetach();
-        mPresenter = null;
         unbinder.unbind();
     }
 }

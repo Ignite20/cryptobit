@@ -18,9 +18,7 @@ public class CoinDetailActivity extends AppCompatActivity {
         if(coinDetailFragment == null){
             coinDetailFragment = CoinDetailFragment.newInstance(getIntent().getExtras());
         }
-        if(mPresenter == null){
-            mPresenter = new CoinDetailPresenter(coinDetailFragment);
-        }
+        initPresenter();
 
         coinDetailFragment.setPresenter(mPresenter);
 
@@ -30,17 +28,21 @@ public class CoinDetailActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+    void initPresenter(){
         if(mPresenter == null){
             mPresenter = new CoinDetailPresenter(coinDetailFragment);
         }
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initPresenter();
+    }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        coinDetailFragment = null;
+    protected void onRestart() {
+        super.onRestart();
+        initPresenter();
     }
+
 }
