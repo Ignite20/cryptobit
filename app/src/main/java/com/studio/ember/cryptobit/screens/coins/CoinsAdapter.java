@@ -7,29 +7,41 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.studio.ember.cryptobit.R;
 import com.studio.ember.cryptobit.model.Coin;
 import com.studio.ember.cryptobit.utils.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-public class CoinsAdapter extends RecyclerView.Adapter<CoinsAdapter.CoinViewHolder> {
+/**
+ * This is the Coins Adapter class
+ * It's in charge of adapting the items to the item view in the recycler view
+ * It extends the Recycler view adapter incorporating a custom ViewHolder
+ * to show the info coming from the list of Coin Objects
+ *
+ * Also implements the Filterable interface to filter the data by the name or symbol.
+ * This is Coin Object specific.
+ */
+public class CoinsAdapter extends RecyclerView.Adapter<CoinsAdapter.CoinViewHolder> implements Filterable{
 
     private View view;
     private CoinViewHolder vh;
     private final OnItemClickListener listener;
-    private List<Coin> mCoins;
+    private List<Coin> mCoins;  // the one showed to the user
+    private List<Coin> originalList;    // the original one for filtering purposes
     private String coinMark = "USD";
     public CoinsAdapter(List<Coin> coins, OnItemClickListener listener) {
         this.listener = listener;
         this.mCoins = coins;
+        this.originalList = coins;
     }
 
     @NonNull
@@ -50,18 +62,57 @@ public class CoinsAdapter extends RecyclerView.Adapter<CoinsAdapter.CoinViewHold
         return mCoins.size();
     }
 
+    @Override
+    public Filter getFilter() {
+        final List<Coin> mFilteredList = new ArrayList<>();
+        mCoins = originalList;
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                FilterResults results = new FilterResults();
 
+                if(!charSequence.toString().isEmpty() || charSequence.toString().length() > 0){
+                    for (Coin coin : mCoins) {
+                        // Break variables into scope variables to ease of use
+                        String lowerName = coin.getName().toLowerCase();
+                        String lowerSymbol = coin.getSymbol().toLowerCase();
+                        String lowerFilterSearch = charSequence.toString().toLowerCase();
+                        // Check the start of the name or symbol
+                        if(lowerName.startsWith(lowerFilterSearch) || lowerSymbol.startsWith(lowerFilterSearch)){
+                            // Add the item to the filtered list
+                            mFilteredList.add(coin);
+                        }
+                    }
+                    // return the filtered values
+                    results.values = mFilteredList;
+                }
+                else{
+                    // Return the original list if the search sequence is an empty string
+                    results.values = originalList;
+                }
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                // Set the filtered list to the one references to the adapter
+                mCoins = (List<Coin>) filterResults.values;
+                // Refresh the list
+                notifyDataSetChanged();
+            }
+        };
+    }
+
+
+    /**
+     * Listener for the click event on recycler view item
+     */
     public interface OnItemClickListener {
         void onItemClick(Coin item);
     }
 
-    public void setCoinMark(String coinMark) {
-        this.coinMark = coinMark;
-    }
 
-    public String getCoinMark() {
-        return coinMark;
-    }
+
 
     class CoinViewHolder extends RecyclerView.ViewHolder{
 

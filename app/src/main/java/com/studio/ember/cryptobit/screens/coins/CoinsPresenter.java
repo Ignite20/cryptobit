@@ -81,7 +81,7 @@ public class CoinsPresenter implements CoinsContract.Presenter, CoinsAdapter.OnI
 
     @Override
     public void filterData(String filterText) {
-
+        coinsAdapter.getFilter().filter(filterText);
     }
 
     @Override
