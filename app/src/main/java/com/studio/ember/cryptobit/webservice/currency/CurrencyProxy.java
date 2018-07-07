@@ -40,6 +40,19 @@ public class CurrencyProxy{
         }
     }
 
+    public Data getMarketCoin(int idCoin, String marketCoin) throws IOException {
+        Data mData;
+        Response<Data> response = proxy.getCurrency(idCoin, marketCoin).execute();
+
+        if(response.isSuccessful()) {
+            mData = response.body();
+            Log.d("currency", mData.toString());
+            return mData;
+        }
+        else{
+            return null;
+        }
+    }
 
 
 }

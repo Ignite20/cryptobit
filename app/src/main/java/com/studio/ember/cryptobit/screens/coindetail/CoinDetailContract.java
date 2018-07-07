@@ -7,10 +7,14 @@ import com.studio.ember.cryptobit.model.Coin;
 public interface CoinDetailContract {
     interface View extends BaseView<CoinDetailContract.Presenter> {
 
-        void setInfo(Coin coin);
+        void showInfo(Coin coin);
     }
 
     interface Presenter extends BasePresenter {
+        void setData(Coin coin);
 
+        void changeMarketCoin(String coin);
+
+        String getMarketCoin();
     }
 }

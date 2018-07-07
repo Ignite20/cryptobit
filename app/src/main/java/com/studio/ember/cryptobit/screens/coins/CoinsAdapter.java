@@ -11,8 +11,10 @@ import android.widget.TextView;
 
 import com.studio.ember.cryptobit.R;
 import com.studio.ember.cryptobit.model.Coin;
+import com.studio.ember.cryptobit.utils.StringUtils;
 
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +26,7 @@ public class CoinsAdapter extends RecyclerView.Adapter<CoinsAdapter.CoinViewHold
     private CoinViewHolder vh;
     private final OnItemClickListener listener;
     private List<Coin> mCoins;
+    private String coinMark = "USD";
     public CoinsAdapter(List<Coin> coins, OnItemClickListener listener) {
         this.listener = listener;
         this.mCoins = coins;
@@ -52,6 +55,14 @@ public class CoinsAdapter extends RecyclerView.Adapter<CoinsAdapter.CoinViewHold
         void onItemClick(Coin item);
     }
 
+    public void setCoinMark(String coinMark) {
+        this.coinMark = coinMark;
+    }
+
+    public String getCoinMark() {
+        return coinMark;
+    }
+
     class CoinViewHolder extends RecyclerView.ViewHolder{
 
         @BindView(R.id.tv_name)
@@ -66,17 +77,21 @@ public class CoinsAdapter extends RecyclerView.Adapter<CoinsAdapter.CoinViewHold
         @BindView(R.id.tv_24h_change)
         TextView tv_24h_change;
 
+        @BindView(R.id.tv_price)
+        TextView tv_price;
+
         CoinViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,view);
         }
 
         void setItem(final Coin coin, final OnItemClickListener listener){
-            Log.d("object", coin.getQuotes().get("USD").getMarket_cap()+"");
+            Log.d("object", coin.getQuotes().get(coinMark).getMarket_cap()+"");
             this.tv_name.setText(coin.getName());
-            this.tv_coin.setText("USD");
-            double value1h = coin.getQuotes().get("USD").getPercent_change_1h();
-            double value24h = coin.getQuotes().get("USD").getPercent_change_24h();
+            this.tv_coin.setText(coinMark);
+            this.tv_price.setText(StringUtils.formatFloat(coin.getQuotes().get(coinMark).getPrice()));
+            double value1h = coin.getQuotes().get(coinMark).getPercent_change_1h();
+            double value24h = coin.getQuotes().get(coinMark).getPercent_change_24h();
             this.tv_1h_change.setText(String.valueOf(value1h));
             this.tv_24h_change.setText(String.valueOf(value24h));
 

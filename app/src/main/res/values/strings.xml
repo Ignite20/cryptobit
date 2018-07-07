@@ -1,6 +1,50 @@
 <resources>
     <string name="app_name">Crypto Bit</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name">Name</string>
+    <string name="rank">Rank</string>
+    <string name="symbol">symbol</string>
+    <string name="max_supply">Max Supply</string>
+    <string name="total_supply">Total Supply</string>
+    <string name="circulating_supply">Circulating Supply</string>
+    <string name="price">Price</string>
+    <string name="market_cap">Market Cap.</string>
+    <string name="change_7d">% Change 7d</string>
+    <string name="change_24h">% Change 24h</string>
+    <string name="change_1h">% Change 1h</string>
+    <string name="volume_24h">Volume 24h</string>
+    <string-array name="market_coins">
+        <item>AUD</item>
+        <item>BRL</item>
+        <item>CAD</item>
+        <item>CHF</item>
+        <item>CLP</item>
+        <item>CNY</item>
+        <item>CZK</item>
+        <item>DKK</item>
+        <item>EUR</item>
+        <item>GBP</item>
+        <item>HKD</item>
+        <item>HUF</item>
+        <item>IDR</item>
+        <item>ILS</item>
+        <item>INR</item>
+        <item>JPY</item>
+        <item>KRW</item>
+        <item>MXN</item>
+        <item>MYR</item>
+        <item>NOK</item>
+        <item>NZD</item>
+        <item>PHP</item>
+        <item>PKR</item>
+        <item>PLN</item>
+        <item>RUB</item>
+        <item>SEK</item>
+        <item>SGD</item>
+        <item>THB</item>
+        <item>TRY</item>
+        <item>TWD</item>
+        <item>USD</item>
+        <item>ZAR</item>
+    </string-array>
+    <string name="search_hint">Search...</string>
 </resources>

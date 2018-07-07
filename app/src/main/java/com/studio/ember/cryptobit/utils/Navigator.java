@@ -15,18 +15,7 @@ import java.io.Serializable;
 
 import static com.studio.ember.cryptobit.utils.Constants.COIN_DETAILS;
 
-public class Navigator <T>{
-
-
-    public static void goToCoins(Activity activity, CoinsFragment coinsFragment, int container, boolean replace) {
-        if (activity != null) {
-            ActivityUtils.init(activity);
-            if (!replace)
-                ActivityUtils.addFragment(coinsFragment, container);
-            else
-                ActivityUtils.replaceFragment(coinsFragment, container);
-        }
-    }
+public class Navigator {
 
     public static void goToDetails(Activity activity, Coin object) {
 

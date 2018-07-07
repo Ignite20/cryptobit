@@ -15,9 +15,6 @@ public class CryptoCurrencyService {
     private static Retrofit retrofit;
 
     private CryptoCurrencyService() {
-
-
-
     }
 
     public static Retrofit getService() {

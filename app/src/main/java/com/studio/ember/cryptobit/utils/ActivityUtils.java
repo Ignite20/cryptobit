@@ -6,18 +6,18 @@ import android.app.FragmentManager;
 
 public class ActivityUtils {
 
-    static FragmentManager fragmentManager;
+    FragmentManager fragmentManager;
 
-    public static void init(Activity activity){
+    public void init(Activity activity){
         fragmentManager = activity.getFragmentManager();
+        fragmentManager.popBackStackImmediate();
     }
 
-    public static void replaceFragment(Fragment fragment, int container){
-        fragmentManager.popBackStackImmediate();
+    public void replaceFragment(Fragment fragment, int container){
         fragmentManager.beginTransaction().replace(container,fragment).commit();
     }
 
-    public static void addFragment(Fragment fragment, int container){
+    public void addFragment(Fragment fragment, int container){
         fragmentManager.beginTransaction().add(container, fragment).commit();
     }
 

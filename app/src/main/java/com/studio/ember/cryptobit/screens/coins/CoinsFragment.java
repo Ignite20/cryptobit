@@ -2,13 +2,19 @@ package com.studio.ember.cryptobit.screens.coins;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -35,12 +41,17 @@ public class CoinsFragment extends Fragment implements CoinsContract.View{
     private LinearLayoutManager layoutManager;
     private Unbinder unbinder;
 
+    @BindView(R.id.action_bar_toolbar)
+    Toolbar mActionBarToolbar;
+
     @BindView(R.id.srl_cryptUpdate)
     SwipeRefreshLayout srl_cryptUpdate;
 
-    @BindView(R.id.rvRecipeList)
-    RecyclerView rvRecipeList;
+    @BindView(R.id.rv_coin_list)
+    RecyclerView rv_coin_list;
 
+    @BindView(R.id.action_search)
+    SearchView sv_coins;
 
     public CoinsFragment() {
         // Required empty public constructor
@@ -68,6 +79,7 @@ public class CoinsFragment extends Fragment implements CoinsContract.View{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_coin, container, false);
+
         unbinder = ButterKnife.bind(this, view);
         return view;
     }
@@ -81,7 +93,7 @@ public class CoinsFragment extends Fragment implements CoinsContract.View{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         mPresenter.start();
         layoutManager = new LinearLayoutManager(getActivity());
-        mPresenter.adaptRecyclerView(rvRecipeList, layoutManager);
+        mPresenter.adaptRecyclerView(rv_coin_list, layoutManager);
 
         srl_cryptUpdate.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -89,18 +101,6 @@ public class CoinsFragment extends Fragment implements CoinsContract.View{
                 mPresenter.updateData();
             }
         });
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
 
     }
 
@@ -121,9 +121,23 @@ public class CoinsFragment extends Fragment implements CoinsContract.View{
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
-
     @Override
-    public void onCoinClick(int position) {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        MenuInflater menuInflater = getActivity().getMenuInflater();
+        menuInflater.inflate(R.menu.toolmenu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+
+        SearchView searchView = null;
+        if (searchItem != null) {
+            searchView = (SearchView) searchItem.getActionView();
+        }
+        if (searchView != null) {
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+        }
 
     }
 }

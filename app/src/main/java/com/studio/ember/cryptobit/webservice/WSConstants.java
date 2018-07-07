@@ -7,9 +7,9 @@ public interface WSConstants {
     String DELIMITER = "/";
 
     // region API calls
-    String TICKER = "ticker";
+    String TICKER = "ticker/";
     String TICKER_ARRAY_SORT_RANK = TICKER+"?convert=EUR&sort=rank&structure=array";
-
+    String TICKER_CONVERT = TICKER+"{id}?structure=array";
     // endregion
 
 }

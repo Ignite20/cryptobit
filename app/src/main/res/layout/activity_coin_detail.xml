@@ -6,4 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".screens.coindetail.CoinDetailActivity">
 
+    <FrameLayout
+        android:id="@+id/flContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </android.support.constraint.ConstraintLayout>

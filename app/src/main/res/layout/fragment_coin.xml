@@ -3,14 +3,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/action_bar_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/primaryColor"
+        app:titleTextColor="@color/primaryTextColor"
+        app:title="@string/app_name"
+        >
+        <android.support.v7.widget.SearchView
+            android:id="@+id/action_search"
+            android:icon="@android:drawable/ic_menu_search"
+            app:showAsAction="always|collapseActionView"
+            app:actionViewClass="android.support.v7.widget.SearchView"
+            android:title="Search"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_gravity="end"/>
+    </android.support.v7.widget.Toolbar>
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/srl_cryptUpdate"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/action_bar_toolbar">
+
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvRecipeList"
+            android:id="@+id/rv_coin_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
