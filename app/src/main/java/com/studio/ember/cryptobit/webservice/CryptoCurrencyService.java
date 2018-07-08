@@ -17,6 +17,10 @@ public class CryptoCurrencyService {
     private CryptoCurrencyService() {
     }
 
+    /**
+     * Returns an instance of the retrofit client
+     * @return
+     */
     public static Retrofit getService() {
         if(retrofit == null){
             retrofit = new Retrofit.Builder()

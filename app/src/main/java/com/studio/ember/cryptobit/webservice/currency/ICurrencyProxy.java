@@ -20,6 +20,12 @@ public interface ICurrencyProxy {
     @GET(WSConstants.TICKER_ARRAY_SORT_RANK)
     Call<Data> getListByRank();
 
+    /**
+     * GET call on cryptoCurrency API that returns a specific cryptocoin and its associated market coin
+     * @param coinId
+     * @param marketCoin
+     * @return
+     */
     @GET(WSConstants.TICKER_CONVERT)
     Call<Data> getCurrency(@Path("id") int coinId, @Query("convert") String marketCoin);
 }

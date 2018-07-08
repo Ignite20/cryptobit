@@ -1,9 +1,5 @@
 package com.studio.ember.cryptobit.model;
 
-import android.support.annotation.Nullable;
-
-import com.google.gson.GsonBuilder;
-
 import java.io.Serializable;
 import java.util.Map;
 
